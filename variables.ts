@@ -18,6 +18,7 @@ export type shape = {
 
 export const SHAPES: shape[] = [
     {
+        // I
         shape: [
             [
                 [0, 0, 0, 0],
@@ -50,6 +51,7 @@ export const SHAPES: shape[] = [
         position: 0,
     },
     {
+        // piramid
         shape: [
             [
                 [0, 0, 0, 0],
@@ -82,6 +84,7 @@ export const SHAPES: shape[] = [
         position: 0,
     },
     {
+        // cube
         shape: [
             [
                 [0, 0, 0, 0],
