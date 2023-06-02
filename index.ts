@@ -28,6 +28,7 @@ EVENTS.on('keypress', key => {
     else if (['down', 's'].includes(key.name) && tryDown(actualShape, BOARD))
         renderBoard(BOARD, score, nextShape, storageShape)
     else if (['c'].includes(key.name)) {
+        if (!canStorage) return
         clearShape(actualShape, BOARD)
         if (storageShape && canStorage) [actualShape, storageShape] = [storageShape, actualShape]
         else if (canStorage) [actualShape, storageShape, nextShape] = [nextShape, actualShape, getRandomShape()]
