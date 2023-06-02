@@ -63,9 +63,10 @@ export function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export function renderBoard(board: board, score: number, nextShape: shape, storageShape: shape | null) {
+export function renderBoard(board: board, score: number, nextShape: shape, storageShape: shape | null, debug?: any) {
     console.clear()
     console.log(transformBoard(board, score, nextShape, storageShape))
+    if (debug) console.log(debug)
 }
 
 export function drawShape(shape: shape, board: board) {
@@ -144,21 +145,21 @@ export function breackLines(board: board) {
     return lines
 }
 
-export function canRotate(shape: shape, board: board) {
+export function canRotate(shape: shape, board: board, to: -1 | 1 = 1) {
     board = structuredClone(board)
     shape = structuredClone(shape)
     clearShape(shape, board)
-    shape.position++
+    shape.position = shape.position + to < 0 ? 3 : shape.position + to
     for (let y = 0; y < shape.shape[shape.position % 4].length; y++)
         for (let x = 0; x < shape.shape[shape.position % 4][y].length; x++)
             if (shape.shape[shape.position % 4][y][x]) if (board[y + shape.y][x + shape.x] !== 0) return false
     return true
 }
 
-export function tryRotate(shape: shape, board: board) {
-    if (!canRotate(shape, board)) return false
+export function tryRotate(shape: shape, board: board, to: -1 | 1 = 1) {
+    if (!canRotate(shape, board, to)) return false
     clearShape(shape, board)
-    shape.position++
+    shape.position = shape.position + to < 0 ? 3 : shape.position + to
     drawShape(shape, board)
     return true
 }

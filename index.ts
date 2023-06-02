@@ -35,7 +35,9 @@ EVENTS.on('keypress', key => {
     } else if (['space'].includes(key.name)) {
         while (tryDown(actualShape, BOARD));
         EVENTS.emit('frame', BOARD)
-    } else if (['up', 'w'].includes(key.name) && tryRotate(actualShape, BOARD))
+    } else if (['up', 'w', 'x'].includes(key.name) && tryRotate(actualShape, BOARD, 1))
+        renderBoard(BOARD, score, nextShape, storageShape)
+    else if (['z'].includes(key.name) && tryRotate(actualShape, BOARD, -1))
         renderBoard(BOARD, score, nextShape, storageShape)
     // else console.log(key)
 })
